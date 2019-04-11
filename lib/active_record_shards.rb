@@ -35,3 +35,41 @@ when '5.0', '5.1', '5.2'
 else
   raise "ActiveRecordShards is not compatible with #{ActiveRecord::VERSION::STRING}"
 end
+
+require 'active_record_shards/deprecation'
+
+ActiveRecordShards::Deprecation.deprecate_methods(
+  ActiveRecordShards::AssociationCollectionConnectionSelection,
+  on_slave_if: :on_replica_if,
+  on_slave_unless: :on_replica_unless,
+  on_slave: :on_replica
+)
+
+ActiveRecordShards::Deprecation.deprecate_methods(
+  ActiveRecordShards::ConnectionSwitcher,
+  on_slave_if: :on_replica_if,
+  on_slave_unless: :on_replica_unless,
+  on_master_or_slave: :on_master_or_replica,
+  on_slave: :on_replica,
+  on_slave?: :on_replica?
+)
+
+ActiveRecordShards::Deprecation.deprecate_methods(
+  ActiveRecordShards::DefaultReplicaPatches,
+  columns_with_force_slave: :columns_with_force_replica,
+  table_exists_with_force_slave?: :table_exists_with_force_replica?,
+  transaction_with_slave_off: :transaction_with_replica_off,
+  on_slave_unless_tx: :on_replica_unless_tx
+)
+
+ActiveRecordShards::Deprecation.deprecate_methods(
+  ActiveRecordShards::Model,
+  on_slave_by_default?: :on_replica_by_default?,
+  :on_slave_by_default= => :on_replica_by_default=
+)
+
+ActiveRecordShards::Deprecation.deprecate_methods(
+  ActiveRecordShards::ShardSelection,
+  on_slave?: :on_replica?,
+  :on_slave= => :on_replica=
+)
