@@ -176,13 +176,13 @@ module ActiveRecordShards
 
     def switch_connection(options)
       if options.any?
-        if options.key?(:slave)
-          # TODO
-          options[:replica] = options.delete(:slave)
-        end
-
         if options.key?(:replica)
           current_shard_selection.on_replica = options[:replica]
+        end
+
+        if options.key?(:slave)
+          # TODO
+          options[:replica] ||= options.delete(:slave)
         end
 
         if options.key?(:shard)
