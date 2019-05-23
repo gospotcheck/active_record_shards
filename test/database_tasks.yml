@@ -14,9 +14,9 @@ test:
   slave:
     database: ars_tasks_test_slave
   shards:
-    0:
+    a:
       database: ars_tasks_test_shard_a
-    1:
+    b:
       database: ars_tasks_test_shard_b
 
 test_adapter:
@@ -26,7 +26,7 @@ test_adapter:
   slave:
     database: ars_tasks_adapter_test_slave
   shards:
-    0:
+    a:
       database: ars_tasks_adapter_test_shard_a
-    1:
+    b:
       database: ars_tasks_adapter_test_shard_b
